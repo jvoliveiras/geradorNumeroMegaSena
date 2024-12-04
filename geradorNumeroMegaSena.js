@@ -1,22 +1,16 @@
-function gerarAleatorios() {
-    var numerosPossiveis = [];
-    var sorteados = [];
+function gerarAleatoriosOtimizado() {
+    const sorteados = [];
+    const numerosPossiveis = Array.from({ length: 60 }, (_, i) => i + 1); 
 
-    for (let i = 1; i <= 60; i++) {
-        numerosPossiveis.push(i);
+    while (sorteados.length < 6) {
+        const aleatorio = Math.floor(Math.random() * 60);
+        if (numerosPossiveis[aleatorio] !== undefined) {
+            sorteados.push(numerosPossiveis[aleatorio]);
+            numerosPossiveis[aleatorio] = undefined; 
+        }
     }
 
-    while(sorteados.length < 6) {
-        var aleatorio = Math.floor(Math.random() * numerosPossiveis.length);
-
-        var numeroEscolhido = numerosPossiveis[aleatorio];
-
-        sorteados.push(numeroEscolhido);
-
-        numerosPossiveis.splice(aleatorio, 1);
-    }
-
-    console.log("Meus Números sorteados:", sorteados);
+    console.log("Números sorteados:", sorteados);
 }
 
-gerarAleatorios();
+gerarAleatoriosOtimizado();
